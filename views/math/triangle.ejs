@@ -1,0 +1,13 @@
+<h3>Cạnh A: <%= canhA %></h3>
+<h3>Cạnh B: <%= canhB %></h3>
+<h3>Cạnh C: <%= canhC %></h3>
+
+<% if (
+    canhA + canhB > canhC &&
+    canhA + canhC > canhB &&
+    canhC + canhB > canhA 
+) {
+    %>
+    <h1>Có hình thành tam giác</h1>
+    <%
+} %>
