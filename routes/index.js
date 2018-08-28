@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+import { Category } from '../db';
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -20,6 +21,11 @@ router.get('/check-tam-giac/:canhA/:canhB/:canhC', function (req, res, next) {
         canhB: Number(canhB),
         canhC: Number(canhC)
     });
+});
+
+router.get('/list-categories', async function(req, res, next) {
+    var listCategories = await Category.find();
+    res.render('category/list_categories', {listCategories} );
 });
 
 module.exports = router;
