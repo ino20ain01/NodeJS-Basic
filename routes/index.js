@@ -28,38 +28,36 @@ router.get('/list-categories', async function(req, res, next) {
     res.render('category/list_categories', {listCategories} );
 });
 
-router.get('/form-update/:cateId?', async function ( req, res, next) {
+router.get('/form-category/:cateId?', async function ( req, res, next) {
     let { cateId } = req.params;
     let category = {};
     if (cateId) {
         category = await Category.findOne({ id: cateId })
     } ;
     
-    res.render('category/form_update', { category });
+    res.render('category/form_category', { category });
 });
 
-router.get('/form-create', async function ( req, res, next) {
-    res.render('category/form_create');
-});
-
-router.get('/action-remove/:cateId', async function ( req, res, next) {
+router.get('/action-remove/:cateId?', async function ( req, res, next) {
     let { cateId } = req.params;
     if (cateId) {
-        await Category.findOneAndRemove({ id: cateId })
-    } ;
+        await Category.findOneAndRemove({ id: cateId });
+    }
 
     res.redirect('/list-categories');
 });
 
-router.post('/action-create', async function ( req, res, next) {
-    // let { cateId } = req.params;
-    // if (cateId) {
-    //     await Category.findOneAndRemove({ id: cateId })
-    // } ;
+router.post('/action-save', async function ( req, res, next) {
+    let { category_id } = req.body,
+        { title }  = req.body,
+        { description } = req.body;
+    if (category_id) {
+        await Category.findOneAndUpdate({ id: category_id }, { $set: { title, description } });
+    } else {
+        await Category.create(req.body);
+    }
 
-    console.log(req.body);
-
-    // res.redirect('/list-categories');
+    res.redirect('/list-categories');
 });
 
 

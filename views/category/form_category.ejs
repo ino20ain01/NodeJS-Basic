@@ -13,7 +13,8 @@
     <body>
         <h1 class="text-center">Form Update</h1>
         <div class="container">
-            <form action="/action-update/<%= category.id ? category.id : '' %>">
+            <form action="/action-save" method="POST">
+                <input name="category_id" id="" type="hidden" value="<%= category.id ? category.id :'' %>">
                 <div class="form-group row">
                     <label for="title" class="col-sm-12 col-form-label">Title: </label>
                     <div class="col-sm-12">
@@ -23,7 +24,7 @@
                 <div class="form-group row">
                     <label for="desc" class="col-sm-12 col-form-label">Description: </label>
                     <div class="col-sm-12">
-                        <textarea class="form-control" name="desc" id="desc" placeholder="Enter description..." cols="30" rows="10"><%= category.description ? category.description : '' %></textarea>
+                        <textarea class="form-control" name="description" id="desc" placeholder="Enter description..." cols="30" rows="10"><%= category.description ? category.description : '' %></textarea>
                     </div>
                 </div>
         
